@@ -1,0 +1,18 @@
+def _paths(self, start: Node | None) -> list[list[Node]]:
+    if start is None:
+        return []
+    
+    paths = self._paths(start.left)
+    paths += self._paths(start.right)
+
+    if paths == []:
+        return [[start]]
+
+    for i in paths:
+        i.append(start)
+
+    return paths
+
+# Calculando custo do método _paths:
+
+...
