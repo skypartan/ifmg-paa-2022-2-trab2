@@ -121,7 +121,25 @@ class ABP:
             nodes += self._inorder(start.right)
 
         return nodes
-    
+
+    def level_search(self) -> list[Node]:
+        nodes: list[Node] = []
+        if self.root is None:
+            return nodes
+
+        nodes_tmp: list[Node] = [ self.root ]
+        while len(nodes_tmp) > 0:
+            tmp = nodes_tmp.pop(0)
+
+            nodes.append(tmp)
+
+            if tmp.left is not None:
+                nodes_tmp.append(tmp.left)
+            if tmp.right is not None:
+                nodes_tmp.append(tmp.right)
+
+        return nodes
+
     def paths(self) -> list[list[Node]]:
         return self._paths(self.root)
 
@@ -156,6 +174,11 @@ if __name__ == "__main__":
     print("]")
 
     print("tree height =", tree.height())
+
+    print("tree by level = [", end="")
+    for node in tree.level_search():
+        print(node.value, ",", end="")
+    print("]")
 
     print("paths = [")
     paths = tree.paths()
